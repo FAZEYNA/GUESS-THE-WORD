@@ -12,25 +12,47 @@ string melangerLettres(string motMystere);
 int main()
 {
     string const motMystere{"BANANE"};
-    string reponse{""};
+    string reponse{""}, reponseRejouer{""};
+    int essai{5};
 
     cout << "Bienvenue cher joueur ! Essayer de trouver le mot mystere. ATTENTION A LA CASSE !" << endl;
     do{
-        cout << "Quel est ce mot : " << melangerLettres(motMystere) << " ? " << endl;
-        cout << "Saisissez votre reponse." << endl;
-        cin >> reponse;
-        cout << endl;
-        if(motMystere == reponse)
+        do{ // CONTROLE DES REPONSES OUI ET NON
+            cout << "Voulez-vous commencer la partie ?";
+            cin >> reponseRejouer;
+            cout << endl;
+        }while(reponseRejouer != "non" && reponseRejouer != "oui");
+
+        if(reponseRejouer == "oui")
         {
-            cout << "Vous avez trouve !!!!!!!!!!!" << endl;
-            break;
+            do{
+                cout << "Quel est ce mot : " << melangerLettres(motMystere) << " ? " << endl;
+                cout << "Saisissez votre reponse." << endl;
+                cin >> reponse;
+                cout << endl;
+                essai--;
+                if(motMystere == reponse)
+                {
+                    cout << "Vous avez trouve !!!!!!!!!!!" << endl;
+                    break;
+                }
+                else
+                {
+                    if(essai > 0)
+                        cout << "Il vous reste " << essai << " tentatives." << endl;
+                    else
+                    {
+                        "Vous avez perdu !";
+                        break;
+                    }   
+                }      
+            }while(motMystere != reponse);
         }
         else
         {
-            cout << "Reessayez !" << endl;
-        }
-        
-    }while(motMystere != reponse);
+            break;
+        }        
+    }while(true);
 
     return 0;
 }
